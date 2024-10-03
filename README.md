@@ -1,2 +1,2 @@
-# jungle-final-project
-나만의 무기를 장착하는 프로젝트
+# jungle-pre-final-project
+나만무 프로젝트 준비 - 메모장 만들기 (front & backend)
