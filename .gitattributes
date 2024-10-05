@@ -1,0 +1,10 @@
+# 모든 텍스트 파일은 LF로 저장
+* text=auto eol=lf
+
+# JS, CSS, JSON 파일은 LF로 저장
+*.js text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+
+# Markdown 파일은 CRLF 형식을 유지
+*.md text eol=crlf
