@@ -3,17 +3,17 @@ import React from 'react';
 
 //클릭하면 onSquareClick 이벤트를 통해 value값을 적어놓고 리턴하는 함수
 function Square({value,onSquareClick}){
-    return(
-        <button className = "square" onClick = {onSquareClick}>
-            {value}
-        </button>
-    );
+  return(
+    <button className = "square" onClick = {onSquareClick}>
+      {value}
+    </button>
+  );
 }
 
 function MyButton(){
-    return (
-        <button>I'm a button</button>
-    );
+  return (
+    <button>I'm a button</button>
+  );
 }
 
 function App() {

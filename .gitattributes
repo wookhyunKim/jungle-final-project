@@ -8,3 +8,18 @@
 
 # Markdown 파일은 CRLF 형식을 유지
 *.md text eol=crlf
+
+# 쉘 스크립트는 LF로 강제
+*.sh text eol=lf
+*.bash text eol=lf
+*.yml text eol=lf
+
+# Windows 전용 파일은 CRLF로 강제
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 바이너리 파일은 줄바꿈 변환을 하지 않음
+*.png binary
+*.jpg binary
+*.gif binary
+*.exe binary
