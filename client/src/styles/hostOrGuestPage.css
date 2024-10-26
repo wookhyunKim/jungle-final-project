@@ -1,0 +1,16 @@
+.hostorguest {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.host {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.guest {
+  display: flex;
+  flex-direction: row;
+}
