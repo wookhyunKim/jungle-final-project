@@ -3,7 +3,7 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "eslint.validate": [
     "javascript",
