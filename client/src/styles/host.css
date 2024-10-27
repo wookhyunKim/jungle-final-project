@@ -1,0 +1,37 @@
+.descript {
+  display: grid;
+  grid-template-rows: 1fr 4px 1fr;
+  width: 100%;
+  padding: 0.1em 0;
+}
+
+.descript > :first-child {
+  grid-row: 1/2;
+}
+
+.descript > :second-child {
+  grid-row: 2/3;
+}
+.descript > :nth-child(3) {
+  grid-row: 3/4;
+}
+
+.border-line {
+  background-color: #d9d9d9;
+  height: 12px;
+}
+
+.image {
+  border: 12px solid #d9d9d9;
+  border-radius: 50%;
+}
+
+.mkroom-btn {
+  margin: 20px 20px;
+}
+
+.identity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

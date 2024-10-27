@@ -1,0 +1,15 @@
+//settings.json
+//저장할때마다 eslint 적용
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.formatOnSave": true,  // 자동으로 포맷팅을 ESLint가 담당하도록 설정
+}

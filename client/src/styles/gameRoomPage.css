@@ -1,0 +1,25 @@
+.grid-container {
+    background-color: blueviolet;
+    width: 100vw;
+    height:100%;
+    border: black 5px;
+    display:grid;
+    grid-template-columns:1fr 300px;
+    grid-template-rows: 120px 1fr 120px;
+}
+
+.status-bar {
+    grid-column: 1/-1;
+    grid-row:1/2;
+}
+
+.main {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+}
+
+.footer {
+    grid-column: 1/-1;
+    grid-row: 3/4;
+    height:1fr;
+}
