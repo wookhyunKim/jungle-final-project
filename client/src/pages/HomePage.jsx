@@ -5,6 +5,8 @@ import nextButton from '../assets/images/nextButton.png';
 import HostOrGuest from '../components/HostOrGuest';
 import Button from '../components/common/Button.jsx'
 import '../styles/homePage.css';
+//상태관리 store 가져오기
+import { usePlayerStore } from '../components/store/players.js';
 
 
 const HomePage = () => {
