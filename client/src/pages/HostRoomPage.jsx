@@ -42,8 +42,6 @@
 
 // export default GuestRoomPage
 
-
-
 // import HostImage from '../assets/images/hostAvatar.png';
 // import HostOrGuest from "../components/HostOrGuest";
 // import { useState } from 'react';
@@ -58,17 +56,15 @@
 //   const [roomCode, setRoomCode] = useState('임시코드');
 //   const [isGameStarted, setIsGameStarted] = useState(false);
 
-
 //   const fetchPlayerInfo = () => {
 
 //   };
-
 
 //   const fetchRoomCode = () => {
 
 //   };
 
-  // 게임 시작함수
+// 게임 시작함수
 //   const handleStartGame = () => {
 //     setIsGameStarted(true);
 //   };

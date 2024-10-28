@@ -5,8 +5,8 @@ import GuestImage from '../assets/images/guestAvatar.png';
 import Button from './common/Button';
 import "../styles/host.css"
 import "../styles/guest.css"
-
 const Profile = ({role,btnName,code,name,type}) => {
+
     const navigate = useNavigate();
     //방만들기버튼 누르면 발생하는 로직...궁금증
     //방번호 코드는 프론트에서 만들어 아님, 서버에서??
@@ -26,7 +26,7 @@ const Profile = ({role,btnName,code,name,type}) => {
         }
     };
 
-    const handleMkRoom= (event) => {
+    const handleMkRoom = (event) => {
         event.preventDefault();
         console.log("Button Clicked!2");
 
@@ -128,4 +128,4 @@ const Profile = ({role,btnName,code,name,type}) => {
   )
 }
 
-export default Profile
+export default Profile;
