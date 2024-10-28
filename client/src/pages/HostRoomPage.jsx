@@ -130,13 +130,13 @@
 import React from 'react'
 import HostOrGuest from '../components/HostOrGuest'
 import Host from '../components/Host'
-import WaitingroomTable from '../components/common/WaitingroomTable'
+// import WaitingroomTable from '../components/common/WaitingroomTable'
 
 const HostRoomPage = () => {
   return (
     <HostOrGuest>
       <Host/>
-      <WaitingroomTable/>
+      {/* <WaitingroomTable/> */}
     </HostOrGuest>
   )
 }
