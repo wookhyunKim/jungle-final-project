@@ -1,7 +1,6 @@
 
 import HostOrGuest from '../components/HostOrGuest'
-import Host from "../components/Profile";
-import Guest from '../components/Guest';
+import { useLocation } from 'react-router-dom';
 import Profile from "../components/Profile"
 import "../styles/hostOrGuestPage.css"
 
@@ -17,15 +16,17 @@ function generateGameCode(length = 6) {
   }
 
 const HostOrGuestPage = () => {
+    const location = useLocation();
+    const {nickname} = location.state || {};
 
     return (
         <HostOrGuest>
             <div className="hostorguest">
                 <div className="host">
-                    <Profile role={"HOST"} btnName={"방만들기"} code = {generateGameCode()}/>
+                    <Profile role={"HOST"} btnName={"방만들기"} code = {generateGameCode()} name = {nickname}/>
                 </div>
                 <div className="guest">
-                    <Profile role = {"GUEST"} btnName={"코드 입력"}/>
+                    <Profile role = {"GUEST"} btnName={"코드 입력"} name = {nickname}/>
                 </div>
             </div>
         </HostOrGuest>

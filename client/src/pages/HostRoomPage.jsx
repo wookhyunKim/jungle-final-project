@@ -140,7 +140,7 @@ const HostRoomPage = () => {
   return (
     <HostOrGuest>
       <div>{code}</div>
-      <Profile role={"HOST"} btnName={"시작하기"} children={<WaitingroomTable players={players}/>}/>
+      <Profile role={"HOST"} btnName={"시작하기"} children={<WaitingroomTable players={players}/>} type={"START"}/>
     </HostOrGuest>
   )
 }
