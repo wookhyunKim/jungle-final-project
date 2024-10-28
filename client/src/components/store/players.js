@@ -16,6 +16,15 @@ export const usePlayerStore = create((set) => ({
         isHost : false,
     },
 
+    //참가자 리스트
+    participants: [],
+    updateParticipantList : (new_list) => set((state)=>({
+        participants : {
+            ...state.participants,
+            participants:new_list
+        }
+    })),
+
     //닉네임설정
     setNickname: (input_nickname) => set((state)=>({
         curPlayer: {
@@ -35,28 +44,34 @@ export const usePlayerStore = create((set) => ({
     // 플레이어 리스트
     players : {},
 
-    //플레이어 추가 : val은 nickname
-    addPlayer: (nick_name) => set((state)=>({
-        playerList : {
-            ...state.playerList,
-            playerNum:'', 
-            nickname :nick_name, 
-            filter : [], 
-            mike :true, 
-            sound :true, 
-            rewardcards:[]
-        }
+    // // 액션: 플레이어 추가
+    // addPlayer: (nickname) => set((state) => ({
+    //     playerList: [
+    //         ...state.playerList,
+    //         {
+    //             playerNum: state.playerList.length + 1,
+    //             nickname: nickname,
+    //             filter: [],
+    //             mike: true,
+    //             sound: true,
+    //             rewardCards: []
+    //         }
+    //     ]
+    // })),
+
+    // 액션: 플레이어 삭제
+    deletePlayer: (playerId) => set((state) => ({
+        playerList: state.playerList.filter((player, index) => index !== playerId)
     })),
-    
-    // //플레이어 삭제 : val은 playerId
-    // deletePlayer: (playerId) => set((state)=>{
-    //     const newPlayerList = [...state.players];
-    //     delete newPlayerList[playerId];
-    //     playerList : [...prev.playerList, {playerNum: (prev.playerList.length)+1, nicknmae:val}];
 
-    // }),
+    // 액션: 상태 초기화
+    resetPlayerState: () => set({
+        curPlayer: {
+            nickname: '',
+            isHost: false,
+        },
+        playerList: []
+    })
+}));
 
-    //플레이어 
-
-}))
-
+export default usePlayerStore;

@@ -1,55 +1,29 @@
-.player-table-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+/* styles/waitingroom.css */
+.waitingroom-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.player-table {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: #98d8d6;
-  padding: 20px;
-  border-radius: 15px;
-  border: 2px solid white;
+.waitingroom-container > div > div {
+  transition: all 0.2s ease;
 }
 
-.player-slot {
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 15px;
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease;
+.waitingroom-container > div > div:hover {
+  transform: translateY(-2px);
+  border-color: #5eead4;
 }
 
-.player-slot.empty {
-  background-color: rgba(255, 255, 255, 0.5);
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.player-slot.occupied {
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.player-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-}
-
-.player-info video {
-  width: 80px;
-  height: 60px;
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-/* 호버 효과 */
-.player-slot:hover {
-  transform: translateX(5px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.waitingroom-container > div > div {
+  animation: slideIn 0.3s ease-out;
 }

@@ -3,6 +3,8 @@ import HostOrGuest from '../components/HostOrGuest'
 import { useLocation } from 'react-router-dom';
 import Profile from "../components/Profile"
 import "../styles/hostOrGuestPage.css"
+import Host from '../components/Host';
+import Guest from '../components/Guest';
 
 
 function generateGameCode(length = 6) {
@@ -23,10 +25,12 @@ const HostOrGuestPage = () => {
         <HostOrGuest>
             <div className="hostorguest">
                 <div className="host">
-                    <Profile role={"HOST"} btnName={"방만들기"} code = {generateGameCode()} name = {nickname}/>
+                    {/* <Profile role={"HOST"} btnName={"방만들기"} code = {generateGameCode()} name = {nickname}/> */}
+                    <Host/>
                 </div>
                 <div className="guest">
-                    <Profile role = {"GUEST"} btnName={"코드 입력"} name = {nickname}/>
+                    {/* <Profile role = {"GUEST"} btnName={"코드 입력"} name = {nickname}/> */}
+                    <Guest/>
                 </div>
             </div>
         </HostOrGuest>

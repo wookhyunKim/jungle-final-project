@@ -1,7 +1,10 @@
+import { usePlayerStore } from "../src/components/store/players";
+
 let OV;
 let session;
 //접속자 명단
 let subscribers = [];
+let participantlist = [];
 
 function joinSession(roomCode,nickName){
     OV = new OpenVidu();
@@ -29,6 +32,27 @@ function joinSession(roomCode,nickName){
 		removeUserData(event.stream.connection);
 	});
 
+	// session 초기화 후 이벤트 리스너 추가
+	session.on('connectionCreated', (event) => {
+
+		const full = event.connection.data;
+		const fulljson = JSON.parse(full);
+		const participantname = fulljson.clientData; 
+		participantlist.push(participantname);
+		console.log("Current participants:", participantlist);
+		// renderWaitingRoomList(participantlist);
+		const store = usePlayerStore.getState();
+		store.updateParticipantList([...participantlist]);
+	 });
+  
+	 session.on('connectionDestroyed', (event) => {
+		participants = participantlist.filter(connection => connection.connectionId !== event.connection.connectionId);
+		console.log("Participant left:", event.connection.data);
+		// console.log("Current participants:", participantlist);
+
+	 });
+  
+
 	// On every asynchronous exception...
 	session.on('exception', (exception) => {
 		console.warn(exception);
@@ -47,11 +71,11 @@ function joinSession(roomCode,nickName){
                 const clientData = JSON.parse(connection.data).clientData;
 
                 // 접속자 정보를 subscribers 배열에 추가
-                subscribers.push({
-                    connectionId: connection.connectionId,
-                    clientData: clientData
-                });
-                console.log("New subscriber added:", subscribers);
+				// subscribers.push({
+				// 	connectionId: connection.connectionId,
+				// 	clientData: clientData
+				// });
+				// console.log("New subscriber added:", subscribers);
 			})
 			.catch(error => {
 				console.log('There was an error connecting to the session:', error.code, error.message);
@@ -63,6 +87,11 @@ function joinSession(roomCode,nickName){
 function getSubscribers() {
     console.log('Current subscribers:', subscribers);
     return subscribers;
+}
+
+function getParticipants() {
+	console.log('Current participants:', participantlist);
+	return participantlist;
 }
 
 function appendUserData(videoElement, connection) {
@@ -140,4 +169,4 @@ function createToken(sessionId) {
 	});
 }
 
-export {joinSession,getSubscribers}
+export {joinSession, getSubscribers, getParticipants}
