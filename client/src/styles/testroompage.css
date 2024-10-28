@@ -1,6 +1,16 @@
-html {
+/* html {
   position: relative;
   min-height: 100%;
+} */
+
+.gameroom-container {
+  width: 100%;
+  height: fit-content;
+}
+.video-area {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav {
@@ -163,7 +173,14 @@ a:hover .demo-logo {
 }
 
 #session-header {
+  display: flex;
+  flex-display: row;
   margin-bottom: 20px;
+}
+
+.user-option {
+  display: flex;
+  flex-direction: column;
 }
 
 #session-title {

@@ -29,7 +29,7 @@ const SessionBar = (remainingTime) => {
         }, []);
 
     return (
-        <ProgressBar 
+        <ProgressBar className="progressBar"
             completed={String(sec)}
             maxCompleted={sessionTime}
             barConatinerClassName="container"
