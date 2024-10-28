@@ -244,14 +244,14 @@ class TestRoomPage extends Component {
               session: this.OV.initSession(),  // 새 세션 초기화
           },
           () => {
-              var mySession = this.state.session;
+              let mySession = this.state.session;
 
               // 이벤트 핸들러 설정
               // 1. 새로운 스트림이 생성될 때 (다른 참가자가 입장할 때)
               mySession.on('streamCreated', (event) => {
                   // 새 참가자의 스트림을 구독
-                  var subscriber = mySession.subscribe(event.stream, undefined);
-                  var subscribers = this.state.subscribers;
+                  let subscriber = mySession.subscribe(event.stream, undefined);
+                  let subscribers = this.state.subscribers;
                   subscribers.push(subscriber);
 
                   this.setState({
@@ -290,10 +290,10 @@ class TestRoomPage extends Component {
                           mySession.publish(publisher);
 
                           // 현재 사용 가능한 비디오 장치 정보 가져오기
-                          var devices = await this.OV.getDevices();
-                          var videoDevices = devices.filter(device => device.kind === 'videoinput');
-                          var currentVideoDeviceId = publisher.stream.getMediaStream().getVideoTracks()[0].getSettings().deviceId;
-                          var currentVideoDevice = videoDevices.find(device => device.deviceId === currentVideoDeviceId);
+                          let devices = await this.OV.getDevices();
+                          let videoDevices = devices.filter(device => device.kind === 'videoinput');
+                          let currentVideoDeviceId = publisher.stream.getMediaStream().getVideoTracks()[0].getSettings().deviceId;
+                          let currentVideoDevice = videoDevices.find(device => device.deviceId === currentVideoDeviceId);
 
                           // 상태 업데이트
                           this.setState({
@@ -341,16 +341,16 @@ class TestRoomPage extends Component {
       try {
           // 사용 가능한 비디오 장치 목록 가져오기
           const devices = await this.OV.getDevices()
-          var videoDevices = devices.filter(device => device.kind === 'videoinput');
+          let videoDevices = devices.filter(device => device.kind === 'videoinput');
 
           // 두 개 이상의 카메라가 있는 경우에만 전환
           if (videoDevices && videoDevices.length > 1) {
               // 현재 사용 중인 카메라가 아닌 다른 카메라 선택
-              var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
+              let newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
 
               if (newVideoDevice.length > 0) {
                   // 새로운 카메라로 스트림 생성
-                  var newPublisher = this.OV.initPublisher(undefined, {
+                  let newPublisher = this.OV.initPublisher(undefined, {
                       videoSource: newVideoDevice[0].deviceId,
                       publishAudio: true,
                       publishVideo: true,
