@@ -1,41 +1,27 @@
-const WaitingroomTable = ({ players = [] }) => {
-    const slots = Array(4).fill(null); // 4개의 고정된 슬롯
-    console.log(players)
+const WaitingroomTable = ({ participants = [] }) => {
+    // Ensure that `participants` is an array
+    const playerList = Array.isArray(participants) ? participants : [];
+    const slots = Array(4).fill(null); // 4 fixed slots
 
     return (
         <div className="player-table-container">
             <div className="player-table">
-                {slots.map((_, index) => {
-                    const player = players[index];
-                    
-                    return (
-                        <div 
-                            key={index} 
-                            className={`player-slot ${player ? 'occupied' : 'empty'}`}
-                        >
-                            {player ? (
-                                <div className="player-info">
-                                    <span>플레이어 #{index + 1}</span>
-                                    <span>{player.clientData}</span>
-                                    {player.videoStream && (
-                                        <video
-                                            autoPlay
-                                            playsInline
-                                            muted={player.isMuted}
-                                            ref={el => {
-                                                if (el) {
-                                                    el.srcObject = player.videoStream;
-                                                }
-                                            }}
-                                        />
-                                    )}
-                                </div>
-                            ) : (
-                                <span>플레이어 #{index + 1}</span>
-                            )}
-                        </div>
-                    );
-                })}
+                {playerList.map((user, index) => (
+                    <div
+                        key={index}
+                        className={`player-slot ${user ? "occupied" : "empty"}`}
+                    >
+                        {user ? (
+                            <div className="player-info">
+                                <span>
+                                    플레이어 #{index + 1} : {user}
+                                </span>
+                            </div>
+                        ) : (
+                            <span>플레이어 #{index + 1}</span>
+                        )}
+                    </div>
+                ))}
             </div>
         </div>
     );

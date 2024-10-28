@@ -42,8 +42,6 @@
 
 // export default GuestRoomPage
 
-
-
 // import HostImage from '../assets/images/hostAvatar.png';
 // import HostOrGuest from "../components/HostOrGuest";
 // import { useState } from 'react';
@@ -58,17 +56,15 @@
 //   const [roomCode, setRoomCode] = useState('임시코드');
 //   const [isGameStarted, setIsGameStarted] = useState(false);
 
-
 //   const fetchPlayerInfo = () => {
 
 //   };
-
 
 //   const fetchRoomCode = () => {
 
 //   };
 
-  // 게임 시작함수
+// 게임 시작함수
 //   const handleStartGame = () => {
 //     setIsGameStarted(true);
 //   };
@@ -127,22 +123,33 @@
 
 // export default GuestRoomPage;
 
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import HostOrGuest from '../components/HostOrGuest'
-import Profile from '../components/Profile'
-import WaitingroomTable from '../components/common/WaitingroomTable'
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import HostOrGuest from "../components/HostOrGuest";
+import Profile from "../components/Profile";
+import WaitingroomTable from "../components/common/WaitingroomTable";
 
 const HostRoomPage = () => {
-  const location = useLocation();
-  const {players = [], code = ''} = location.state || {};
+    const location = useLocation();
+    const { players = [], code, nickname } = location.state || {};
+    let participants = [nickname];
+    sessionStorage.setItem(
+        `${code}_participants`,
+        JSON.stringify(participants)
+    );
+    return (
+        <>
+            <h1>방코드 : {code}</h1>
+            <HostOrGuest>
+                <Profile
+                    role={"HOST"}
+                    btnName={"시작하기"}
+                    children={<WaitingroomTable participants={participants} />}
+                    type={"START"}
+                />
+            </HostOrGuest>
+        </>
+    );
+};
 
-  return (
-    <HostOrGuest>
-      <div>{code}</div>
-      <Profile role={"HOST"} btnName={"시작하기"} children={<WaitingroomTable players={players}/>} type={"START"}/>
-    </HostOrGuest>
-  )
-}
-
-export default HostRoomPage
+export default HostRoomPage;
