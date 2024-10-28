@@ -1,6 +1,16 @@
-html {
+/* html {
   position: relative;
   min-height: 100%;
+} */
+
+.gameroom-container {
+  width: 100%;
+  height: fit-content;
+}
+.video-area {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 nav {
@@ -87,7 +97,7 @@ input.btn {
   border-color: #1abd61;
 }
 
-.footer {
+/* .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -99,7 +109,7 @@ input.btn {
   margin: 20px 0;
   float: left;
   color: #ccc;
-}
+} */
 
 .openvidu-logo {
   height: 35px;
@@ -163,7 +173,14 @@ a:hover .demo-logo {
 }
 
 #session-header {
+  display: flex;
+  flex-display: row;
   margin-bottom: 20px;
+}
+
+.user-option {
+  display: flex;
+  flex-direction: column;
 }
 
 #session-title {

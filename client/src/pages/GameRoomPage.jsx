@@ -6,7 +6,7 @@ import '../styles/gameRoomPage.css';
 const GameRoomPage = () => {
     return (
         <div className="grid-container">
-            <StatusBar className="statusBar"/>
+            <StatusBar/>
             <Main/>
             <Footer/>
         </div>

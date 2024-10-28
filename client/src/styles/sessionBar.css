@@ -1,7 +1,7 @@
-/* .container {
-    background-color: #00FF00;
-    opacity: 0.5;
-} */
+.sessionBar .container {
+  background-color: #00ff00;
+  opacity: 0.5;
+}
 
 /*남은 시간표시 바*/
 .barRemainTime {
@@ -19,3 +19,8 @@
 /*남은 시간 글자*/
 /* .label {
 } */
+
+.progressBar {
+  min-width: 1000px;
+  flex: 1;
+}
