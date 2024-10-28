@@ -132,24 +132,27 @@ import WaitingroomTable from '../components/common/WaitingroomTable'
 
 const HostRoomPage = () => {
   const location = useLocation();
-  const {roomcode = '',nickname = ''} = location.state || {};
+  const {code,nickname} = location.state || {};
 
-  const [roomCode, setRoomcode] = useState(roomcode);
-    const [nickName, setNickname] = useState(nickname);
 
     const hasEffectRun = useRef(false); // Flag to prevent double execution
+    console.log("진짜 바보1", code);
 
     useEffect(() => {
       if (!hasEffectRun.current) {  // Check if effect has run
-        joinSession(roomCode, nickName);
+        console.log("진짜 바보2", code);
+        joinSession(code, nickname);
         hasEffectRun.current = true;  // Mark as run
       }
     }, []);
   return (
+    <>
+    <h1>{code}</h1>
     <HostOrGuest>
       <Profile role={"HOST"} btnName={"시작하기"} type={true}/>
       
     </HostOrGuest>
+    </>
   )
 }
 

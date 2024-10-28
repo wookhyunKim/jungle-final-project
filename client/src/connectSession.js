@@ -5,7 +5,7 @@ let session;
 /* OPENVIDU METHODS */
 
 function joinSession(roomCode,nickName) {
-
+	console.log("첫번째 방 코드:", roomCode);
 	// --- 1) Get an OpenVidu object ---
 
 	OV = new OpenVidu();
@@ -47,6 +47,7 @@ function joinSession(roomCode,nickName) {
 
 	// Get a token from the OpenVidu deployment
 	getToken(roomCode).then(token => {
+		console.log("방코드:",roomCode);
 
 		// First param is the token got from the OpenVidu deployment. Second param can be retrieved by every user on event
 		// 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname

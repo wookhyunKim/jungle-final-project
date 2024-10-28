@@ -10,35 +10,39 @@ function generateGameCode(length = 6) {
         const randomIndex = Math.floor(Math.random() * characters.length);
         code += characters[randomIndex];
     }
+   
     return code;
 }
+const code = generateGameCode();
 
 const HostOrGuestPage = () => {
     const location = useLocation();
     const { nickname } = location.state || {};
 
     return (
+        <>
         <HostOrGuest>
             <div className="hostorguest">
                 <div className="host">
                     <Profile
                         role={"HOST"}
                         btnName={"방만들기"}
-                        code={generateGameCode()}
-                        name={"HOST"}
-                        nickname={nickname}
+                        code={code}
+                        // name={"HOST"}
+                        name={nickname}
                     />
                 </div>
                 <div className="guest">
                     <Profile
                         role={"GUEST"}
                         btnName={"코드 입력"}
-                        name={"GUEST"}
-                        nickname={nickname}
+                        // name={"GUEST"}
+                        name={nickname}
                     />
                 </div>
             </div>
         </HostOrGuest>
+        </>
     );
 };
 
