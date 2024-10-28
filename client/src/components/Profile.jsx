@@ -27,22 +27,20 @@ const Profile = ({role,btnName,code,name,type}) => {
         }
     };
 
-    const handleMkRoom= (event) => {
-        event.preventDefault();
-        console.log("Button Clicked!2");
-
-        if(type === true){
+    const handleMkRoom = (event) => {
+      event.preventDefault();
+      console.log("Button Clicked!2");
+  
+      if (type === true) {
           setIsSessionActive(true);
-        }
-          const targetUrl = role === "HOST" ? "/hostroom" : "/guestroom";
-          //players 전달
-          
-          navigate(targetUrl, { state: {code,nickname} });
+      }
+  
+      const targetUrl = role === "HOST" ? "/hostroom" : "/guestroom";
+      // Use inputCode if the role is not "HOST"; otherwise, use the provided code.
+      const codeToSend = role === "HOST" ? code : inputCode;
       
-        
-      //const targetUrl = "/hostroom";
-      //navigate(targetUrl);
-    }
+      navigate(targetUrl, { state: { code: codeToSend, nickname } });
+  }
 
     const startGame = (event) => {
       event.preventDefault();
