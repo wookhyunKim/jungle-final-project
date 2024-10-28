@@ -123,33 +123,34 @@
 
 // export default GuestRoomPage;
 
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import HostOrGuest from "../components/HostOrGuest";
-import Profile from "../components/Profile";
-import WaitingroomTable from "../components/common/WaitingroomTable";
+import React from 'react'
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState, useRef } from "react";
+import HostOrGuest from '../components/HostOrGuest'
+import Profile from '../components/Profile'
+import WaitingroomTable from '../components/common/WaitingroomTable'
 
 const HostRoomPage = () => {
-    const location = useLocation();
-    const { players = [], code, nickname } = location.state || {};
-    let participants = [nickname];
-    sessionStorage.setItem(
-        `${code}_participants`,
-        JSON.stringify(participants)
-    );
-    return (
-        <>
-            <h1>방코드 : {code}</h1>
-            <HostOrGuest>
-                <Profile
-                    role={"HOST"}
-                    btnName={"시작하기"}
-                    children={<WaitingroomTable participants={participants} />}
-                    type={"START"}
-                />
-            </HostOrGuest>
-        </>
-    );
-};
+  const location = useLocation();
+  const {roomcode = '',nickname = ''} = location.state || {};
 
-export default HostRoomPage;
+  const [roomCode, setRoomcode] = useState(roomcode);
+    const [nickName, setNickname] = useState(nickname);
+
+    const hasEffectRun = useRef(false); // Flag to prevent double execution
+
+    useEffect(() => {
+      if (!hasEffectRun.current) {  // Check if effect has run
+        joinSession(roomCode, nickName);
+        hasEffectRun.current = true;  // Mark as run
+      }
+    }, []);
+  return (
+    <HostOrGuest>
+      <Profile role={"HOST"} btnName={"시작하기"} type={true}/>
+      
+    </HostOrGuest>
+  )
+}
+
+export default HostRoomPage
