@@ -129,18 +129,25 @@
 
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from "react";
 import HostOrGuest from '../components/HostOrGuest'
 import Profile from '../components/Profile'
 import WaitingroomTable from '../components/common/WaitingroomTable'
 
 const HostRoomPage = () => {
   const location = useLocation();
-  const {players = [], code = ''} = location.state || {};
+  const {roomcode = '',nickname = ''} = location.state || {};
 
+  const [roomCode, setRoomcode] = useState(roomcode);
+    const [nickName, setNickname] = useState(nickname);
+
+    useEffect(() => {
+      joinSession(roomCode, nickName);
+    }, []); // roomCode와 nickName이 변경될 때만 실행
   return (
     <HostOrGuest>
-      <div>{code}</div>
-      <Profile role={"HOST"} btnName={"시작하기"} children={<WaitingroomTable players={players}/>} type={"START"}/>
+      <Profile role={"HOST"} btnName={"시작하기"} type={true}/>
+      
     </HostOrGuest>
   )
 }
