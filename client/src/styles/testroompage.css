@@ -43,12 +43,12 @@ nav i.fa:hover {
   padding-bottom: 80px;
 }
 
-/*vertical-center {
-	position: relative;
-	top: 30%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}*/
+vertical-center {
+  position: relative;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .horizontal-center {
   margin: 0 auto;
@@ -144,10 +144,10 @@ a:hover .demo-logo {
   text-align: center;
   margin-top: 3em;
   margin-bottom: 3em;
-  /*position: relative;
-	top: 20%;
-	left: 50%;
-	transform: translate(-50%, -50%);*/
+  position: relative;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #img-div img {
