@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import { useState } from "react";
+import { useEffect,useState,useRef } from "react";
 import HostImage from '../assets/images/hostAvatar.png';
 import GuestImage from '../assets/images/guestAvatar.png';
 import Button from './common/Button';
@@ -13,10 +13,22 @@ const Profile = ({role,btnName,children,code,name,type}) => {
     //방번호 코드는 프론트에서 만들어 아님, 서버에서??
     //일단 다른 페이지로 이동하는걸로
 
-    // 필요한 상태와 핸들러 선언
-    const [players, setPlayers] = useState(getSubscribers) 
-    const [sessionCode, setSessionCode] = useState(code);
-  const [sessionName, setSessionName] = useState(name);
+        // 필요한 상태와 핸들러 선언
+        const [players, setPlayers] = useState(() => {
+          const subscribers = getSubscribers();
+          return subscribers;
+      });
+    const [roomCode, setRoomcode] = useState(code);
+    const [nickname, setNickname] = useState(name);
+
+    const hasJoined = useRef(false);
+
+useEffect(() => {
+    if (!hasJoined.current) {
+        joinSession(roomCode, nickname);
+        hasJoined.current = true;  // 한 번만 실행되도록 설정
+    }
+}, []);
     
     const [inputCode, setInputValue] = role !== "HOST" 
         ? useState('') 
@@ -30,12 +42,11 @@ const Profile = ({role,btnName,children,code,name,type}) => {
 
     const handleMkRoom= (event) => {
         event.preventDefault();
-        joinSession(sessionCode,sessionName);
 
         const targetUrl = role === "HOST" ? "/hostroom" : "/guestroom";
         //players 전달
         if (role === "HOST") {
-          navigate(targetUrl, { state: { players,sessionCode} });
+          navigate(targetUrl, { state: { players,roomCode} });
       } else {
           navigate(targetUrl);
       }

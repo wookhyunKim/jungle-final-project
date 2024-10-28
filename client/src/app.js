@@ -1,5 +1,4 @@
-let OV;
-let session;
+import { OpenVidu } from 'openvidu-browser';
 
 
 /* OPENVIDU METHODS */

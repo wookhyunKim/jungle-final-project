@@ -87,7 +87,7 @@ input.btn {
   border-color: #1abd61;
 }
 
-.footer {
+/* .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -99,7 +99,7 @@ input.btn {
   margin: 20px 0;
   float: left;
   color: #ccc;
-}
+} */
 
 .openvidu-logo {
   height: 35px;
