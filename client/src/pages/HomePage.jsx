@@ -18,6 +18,7 @@ const HomePage = () => {
       setIsHome(true);
       navigate('/hostOrGuest',{state:{nickname}});
     }
+    
     return (
       <div className="game-container">
         {!isHome ? (

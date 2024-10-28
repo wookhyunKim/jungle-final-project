@@ -6,6 +6,7 @@ import HostOrGuestPage from './pages/HostOrGuestPage.jsx';
 import GameRoomPage from './pages/GameRoomPage.jsx';
 import GuestRoomPage from './pages/GuestRoomPage.jsx';
 import HostRoomPage from './pages/HostRoomPage.jsx';
+import TakePhotosPage from './pages/TakePhotosPage.jsx';
 import TestRoomPage from './pages/TestRoomPage.jsx';
 // import './app.css';
 
@@ -23,6 +24,8 @@ function App() {
                 <Route path='/hostroom' element={<HostRoomPage/>}/>
                 <Route path='/testroom' element={<TestRoomPage/>}/>
                 {/* <Route path="/" element={<Test/>}/> */}
+                <Route path='/takephotos' element={<TakePhotosPage/>}/>
+                
             </Routes>
         </BrowserRouter>
     );

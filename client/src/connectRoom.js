@@ -15,7 +15,7 @@ function joinSession(roomCode,nickName){
 
 		// When the HTML video has been appended to DOM...
 		subscriber.on('videoElementCreated', event => {
-
+			console.log("videoElementCreated event");
 			// Add a new <p> element for the user's nickname just below its video
 			appendUserData(event.element, subscriber.stream.connection);
 		});
@@ -43,15 +43,15 @@ function joinSession(roomCode,nickName){
 			.then(() => {
                 console.log("connect success!")
                  // 세션 접속 시에 접속자 정보를 배열에 추가
-                 const connection = session.connection;
-                 const clientData = JSON.parse(connection.data).clientData;
- 
-                 // 접속자 정보를 subscribers 배열에 추가
-                 subscribers.push({
-                     connectionId: connection.connectionId,
-                     clientData: clientData
-                 });
-                 console.log("New subscriber added:", clientData);
+                const connection = session.connection;
+                const clientData = JSON.parse(connection.data).clientData;
+
+                // 접속자 정보를 subscribers 배열에 추가
+                subscribers.push({
+                    connectionId: connection.connectionId,
+                    clientData: clientData
+                });
+                console.log("New subscriber added:", subscribers);
 			})
 			.catch(error => {
 				console.log('There was an error connecting to the session:', error.code, error.message);
