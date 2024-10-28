@@ -50,7 +50,7 @@ const Profile = ({role,btnName,code,name,type}) => {
 
   return (
     <>
-      <img className="image" src={role === "HOST" ? HostImage : GuestImage} style={{ width: '200px', height: '200px'}}/>
+      <img className="image" src={role === "HOST" ? HostImage : GuestImage} style={{ display: isSessionActive ? 'none' : 'block',width: '200px', height: '200px'}}/>
       <div className="descript">
         <div className="identity">{name}</div>
         <div className="border-line"/>

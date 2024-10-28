@@ -129,7 +129,7 @@
 
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import HostOrGuest from '../components/HostOrGuest'
 import Profile from '../components/Profile'
 import WaitingroomTable from '../components/common/WaitingroomTable'
@@ -141,9 +141,14 @@ const HostRoomPage = () => {
   const [roomCode, setRoomcode] = useState(roomcode);
     const [nickName, setNickname] = useState(nickname);
 
+    const hasEffectRun = useRef(false); // Flag to prevent double execution
+
     useEffect(() => {
-      joinSession(roomCode, nickName);
-    }, []); // roomCode와 nickName이 변경될 때만 실행
+      if (!hasEffectRun.current) {  // Check if effect has run
+        joinSession(roomCode, nickName);
+        hasEffectRun.current = true;  // Mark as run
+      }
+    }, []);
   return (
     <HostOrGuest>
       <Profile role={"HOST"} btnName={"시작하기"} type={true}/>
