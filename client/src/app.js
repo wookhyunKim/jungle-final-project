@@ -1,13 +1,12 @@
-var OV;
-var session;
+import { OpenVidu } from 'openvidu-browser';
 
 
 /* OPENVIDU METHODS */
 
 function joinSession() {
 
-	var mySessionId = document.getElementById("sessionId").value;
-	var myUserName = document.getElementById("userName").value;
+	let mySessionId = document.getElementById("sessionId").value;
+	let myUserName = document.getElementById("userName").value;
 
 	// --- 1) Get an OpenVidu object ---
 
@@ -23,7 +22,7 @@ function joinSession() {
 	session.on('streamCreated', event => {
 
 		// Subscribe to the Stream to receive it. HTML video will be appended to element with 'video-container' id
-		var subscriber = session.subscribe(event.stream, 'video-container');
+		let subscriber = session.subscribe(event.stream, 'video-container');
 
 		// When the HTML video has been appended to DOM...
 		subscriber.on('videoElementCreated', event => {
@@ -64,7 +63,7 @@ function joinSession() {
 
 				// --- 6) Get your own camera stream with the desired properties ---
 
-				var publisher = OV.initPublisher('video-container', {
+				let publisher = OV.initPublisher('video-container', {
 					audioSource: undefined, // The source of audio. If undefined default microphone
 					videoSource: undefined, // The source of video. If undefined default webcam
 					publishAudio: true,  	// Whether you want to start publishing with your audio unmuted or not
@@ -127,8 +126,8 @@ function generateParticipantInfo() {
 }
 
 function appendUserData(videoElement, connection) {
-	var userData;
-	var nodeId;
+	let userData;
+	let nodeId;
 	if (typeof connection === "string") {
 		userData = connection;
 		nodeId = connection;
@@ -136,7 +135,7 @@ function appendUserData(videoElement, connection) {
 		userData = JSON.parse(connection.data).clientData;
 		nodeId = connection.connectionId;
 	}
-	var dataNode = document.createElement('div');
+	let dataNode = document.createElement('div');
 	dataNode.className = "data-node";
 	dataNode.id = "data-" + nodeId;
 	dataNode.innerHTML = "<p>" + userData + "</p>";
@@ -145,12 +144,12 @@ function appendUserData(videoElement, connection) {
 }
 
 function removeUserData(connection) {
-	var dataNode = document.getElementById("data-" + connection.connectionId);
+	let dataNode = document.getElementById("data-" + connection.connectionId);
 	dataNode.parentNode.removeChild(dataNode);
 }
 
 function removeAllUserData() {
-	var nicknameElements = document.getElementsByClassName('data-node');
+	let nicknameElements = document.getElementsByClassName('data-node');
 	while (nicknameElements[0]) {
 		nicknameElements[0].parentNode.removeChild(nicknameElements[0]);
 	}
@@ -158,7 +157,7 @@ function removeAllUserData() {
 
 function addClickListener(videoElement, userData) {
 	videoElement.addEventListener('click', function () {
-		var mainVideo = $('#main-video video').get(0);
+		let mainVideo = $('#main-video video').get(0);
 		if (mainVideo.srcObject !== videoElement.srcObject) {
 			$('#main-video').fadeOut("fast", () => {
 				$('#main-video p').html(userData);
@@ -192,7 +191,7 @@ function initMainVideo(videoElement, userData) {
  * more about the integration of OpenVidu in your application server.
  */
 
-var APPLICATION_SERVER_URL = "https://mmyopenvidu.onrender.com/";
+let APPLICATION_SERVER_URL = "https://mmyopenvidu.onrender.com/";
 
 function getToken(mySessionId) {
 	return createSession(mySessionId).then(sessionId => createToken(sessionId));
