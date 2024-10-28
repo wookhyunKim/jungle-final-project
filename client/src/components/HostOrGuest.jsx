@@ -23,7 +23,7 @@ const HostOrGuest = (props) => {
             <div className="footer">
                 <Button onClick={handleBackBtn} className="backbutton"
                 variant="black"
-                size = "meduim">Back</Button>
+                size = "medium">Back</Button>
             </div>
         </div>
     );

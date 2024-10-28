@@ -10,10 +10,11 @@ import '../styles/homePage.css';
 const HomePage = () => {
     const [isHome, setIsHome] = useState(false);
     const navigate = useNavigate(); // 페이지 이동을 위한 hook
+    const[nickname,setNickname] = useState('');
     
     const toGuestorHost = () => {
       setIsHome(true);
-      navigate('/hostOrGuest');
+      navigate('/hostOrGuest',{state:{nickname}});
     }
     return (
       <div className="game-container">
@@ -39,6 +40,8 @@ const HomePage = () => {
                 type="text" 
                 placeholder="닉네임을 입력하세요" 
                 className="nickname-input"
+                value={nickname}
+                onChange={(event) => setNickname(event.target.value)}
               />
               <button 
                 className="arrow-button"

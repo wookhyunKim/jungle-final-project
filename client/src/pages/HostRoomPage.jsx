@@ -128,15 +128,19 @@
 // export default GuestRoomPage;
 
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import HostOrGuest from '../components/HostOrGuest'
-import Host from '../components/Host'
-// import WaitingroomTable from '../components/common/WaitingroomTable'
+import Profile from '../components/Profile'
+import WaitingroomTable from '../components/common/WaitingroomTable'
 
 const HostRoomPage = () => {
+  const location = useLocation();
+  const {players = [], code = ''} = location.state || {};
+
   return (
     <HostOrGuest>
-      <Host/>
-      {/* <WaitingroomTable/> */}
+      <div>{code}</div>
+      <Profile role={"HOST"} btnName={"시작하기"} children={<WaitingroomTable players={players}/>} type={"START"}/>
     </HostOrGuest>
   )
 }
