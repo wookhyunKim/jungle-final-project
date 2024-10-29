@@ -17,6 +17,7 @@ const Footer = () => {
         </div >
         {/* click시 발생할 로직 추가해야 */}
         <div className="footer-btn">
+          {/*여기에 onclick으로 leaveSession하면서 방 나가기 해야될듯*/}
           <Button variant="red" size="medium">게임 종료</Button>
         </div>
         <div className="footer-input">
