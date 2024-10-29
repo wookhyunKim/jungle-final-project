@@ -1,4 +1,4 @@
-.main-container {
+/* .main-container {
   posiiton: relative;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   min-height: 100vh;
   max-height: fit-content;
   width: 680px;
-}
+} */
 
 .backbutton {
   /* position: absolute; */
@@ -14,21 +14,21 @@
   bottom: 20px;
 }
 
-.header {
+/* .header {
   padding-top: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.hostOrGuest-main {
+/* .hostOrGuest-main {
   display: flex;
   width: 100%;
   justify-content: center;
   padding: 1em 0;
-}
+} */
 
-.footer {
+/* .footer {
   padding-bottom: 40px;
-}
+} */

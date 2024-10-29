@@ -1,16 +1,16 @@
 //sectionactive 여부에 따라, 대기 상태에서 보였던 요소들이 안보이게 해줌
 
 /* 기본 상태의 to-be-none 클래스 스타일 */
-.to-be-none {
+/* .to-be-none {
   opacity: 1;
   visibility: visible;
   width: 0;
   height: auto;
   transition: all 0.3s ease-in-out;
-}
+} */
 
 /* isSessionActive가 true일 때 적용될 스타일 */
-.session-active .to-be-none {
+/* .session-active .to-be-none {
   opacity: 0;
   visibility: hidden;
   width: 0;
@@ -18,7 +18,7 @@
   overflow: hidden;
   margin: 0;
   padding: 0;
-}
+} */
 
 /* 이미지에 대한 기본 스타일 */
 .image {

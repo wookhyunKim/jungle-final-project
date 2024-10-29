@@ -8,7 +8,7 @@ import "../styles/host.css"
 import "../styles/guest.css"
 import "../styles/profile.css"
 import useGameStageStore from"../components/store/gameStage.js"
-// import {startSTT, stopSTT} from '../utils/gameUtils.jsx'
+
 
 
 // 세션 컨트롤 컴포넌트
@@ -118,15 +118,16 @@ const SessionControls = () => {
 };
 
 // 비디오 세션 컴포넌트
-const VideoSession = ({ isSessionActive, onGameStart, onLeaveSession }) => (
-  <div id="session" style={{ display: isSessionActive ? 'block' : 'none' }}>
+const VideoSession = ({onGameStart, onLeaveSession }) => (
+  // <div id="session" style={{ display: isSessionActive ? 'block' : 'none' }}>
+  <div id="session">
     <div id="session-header">
       <h1 id="session-title"></h1>
       <input
         className="btn btn-large btn-danger"
         type="button"
         id="buttonLeaveSession"
-        onMouseUp={onLeaveSession}
+        onClick={onLeaveSession}
         value="Leave session"
       />
     </div>
@@ -162,7 +163,7 @@ const Profile = ({role, btnName, code, name, type}) => {
   //상태관리 가져오기/////////////
   const isSessionActive = useGameStageStore((state) => state.isSessionActive);
   const setIsSessionActive = useGameStageStore((state) => state.setIsSessionActive);
-  const [isGameActive, setIsGameActive] = useState(false);
+  // const [isGameActive, setIsGameActive] = useState(false);
   const [inputCode, setInputValue] = !isHost ? useState('') : [null, () => {}];
 
   /////////////////////////////////////
@@ -193,41 +194,50 @@ const Profile = ({role, btnName, code, name, type}) => {
 
   return (
     <>
-      <img 
-        className="image to-be-none" 
+      <img className="image" 
         src={isHost ? HostImage : GuestImage} 
         style={{ 
-          display: isSessionActive ? 'none' : 'block',
           width: '200px', 
           height: '200px'
         }}
+        // style={{ 
+        //   display: isSessionActive ? 'none' : 'block',
+        //   width: '200px', 
+        //   height: '200px'
+        // }}
       />
-      <div className="descript to-be-none">
-        <div className="identity to-be-none">{name}</div>
-        <div className="border-line to-be-none"/>
+      <div className="descript">
+        <div className="identity">{name}</div>
+        <div className="border-line"/>
         
         {type && (
           <>
             <div 
               className="player-table-container" 
               style={{ 
-                display: isSessionActive ? 'none' : 'block', 
+                // display: isSessionActive ? 'none' : 'block', 
                 marginTop: '20px' 
               }}
+              // style={{ 
+              //   marginTop: '20px' 
+              // }}
             >
               <div className="player-table" />
             </div>
 
             <VideoSession 
-              isSessionActive={isSessionActive}
+              // isSessionActive={isSessionActive}
               onGameStart={startGame}
               onLeaveSession={() => {}} // leaveSession 구현 필요
             />
           </>
         )}
 
+
+        {/* 호스트인지, 게스트인지 여부에 따라서, button/inputform 나타남 */}
         {isHost ? (
-          <Button className="mkroom-btn to-be-none" onClick={handleMkRoom}>
+          <Button className="mkroom-btn"
+              onClick={handleMkRoom}>
             {btnName}
           </Button>
         ) : (
@@ -237,6 +247,7 @@ const Profile = ({role, btnName, code, name, type}) => {
             type={type}
             btnName={btnName}
             onStartGame={startGame}
+            onClick={leaveSession}
             onMkRoom={handleMkRoom}
           />
         )}

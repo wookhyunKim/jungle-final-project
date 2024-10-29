@@ -1,4 +1,3 @@
-// useGameStageStore.js
 import { create } from 'zustand'
 
 const useGameStageStore = create((set) => ({
