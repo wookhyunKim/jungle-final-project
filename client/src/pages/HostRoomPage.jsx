@@ -136,11 +136,9 @@ const HostRoomPage = () => {
 
 
     const hasEffectRun = useRef(false); // Flag to prevent double execution
-    console.log("진짜 바보1", code);
 
     useEffect(() => {
       if (!hasEffectRun.current) {  // Check if effect has run
-        console.log("진짜 바보2", code);
         joinSession(code, nickname);
         hasEffectRun.current = true;  // Mark as run
       }

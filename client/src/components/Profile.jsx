@@ -29,7 +29,6 @@ const Profile = ({role,btnName,code,name,type}) => {
 
     const handleMkRoom = (event) => {
       event.preventDefault();
-      console.log("Button Clicked!2");
   
       if (type === true) {
           setIsSessionActive(true);
@@ -44,7 +43,6 @@ const Profile = ({role,btnName,code,name,type}) => {
 
     const startGame = (event) => {
       event.preventDefault();
-      console.log("Button Clicked!");
       setIsSessionActive(true); // 상태를 true로 변경하여 session 표시
     }
 
@@ -52,7 +50,7 @@ const Profile = ({role,btnName,code,name,type}) => {
     <>
       <img className="image" src={role === "HOST" ? HostImage : GuestImage} style={{ display: isSessionActive ? 'none' : 'block',width: '200px', height: '200px'}}/>
       <div className="descript">
-        <div className="identity">{name}</div>
+        <div className="identity" style={{ display: isSessionActive ? 'none' : 'block'}}>{role === "HOST" ?"HOST":"GUEST"}</div>
         <div className="border-line"/>
         {type === true && (
                     <>
