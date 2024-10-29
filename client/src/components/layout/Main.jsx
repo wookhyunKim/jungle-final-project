@@ -5,6 +5,7 @@ import SideElement from '../common/SideElement'
 import UserBannedWords from '../common/UserBannedWords'
 import useStoreTime from "../store/gameInfoStore";
 import useScriptStore from "../store/gameScripts";
+import useGameStore from "../store/gameInfoStore";
 
 import goongYeImage from '../../assets/images/goongYeImage.png'
 import GoongYeCmtSec from '../goongYeCmtSec'
@@ -33,6 +34,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 };
 
 const Main = () => {
+    const { currentStage, sessionTime, currentScript, goToNextStage, decrementTime } = useGameStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const time = useStoreTime((state) => state.time);
     const [showModal, setShowModal] = useState(false);
