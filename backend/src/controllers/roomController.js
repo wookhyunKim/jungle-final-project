@@ -22,7 +22,8 @@ async function getOneRoom(req, res) {
 
 async function createRoom(req, res) {
     const roomCode = req.body.roomCode;
-    const result = await RoomService.createRoom(roomCode);
+    const nickname = req.body.nickname;
+    const result = await RoomService.createRoom(roomCode,nickname);
     if (result) {
         res.json({ success: true });
     } else {
@@ -42,6 +43,7 @@ async function deleteRoom(req, res) {
 }
 async function patchRoom(req, res) {
     const roomCode = req.params.roomCode;
+    console.log(roomCode);
     const result = await RoomService.patchRoom(roomCode);
     if (result) {
         res.json(result);

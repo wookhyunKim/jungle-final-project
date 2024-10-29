@@ -18,7 +18,6 @@ export const calculateFilterPosition = (keypoints) => {
         keypoints[facePoint.leftEyeBottom].y -
         keypoints[facePoint.leftEyeTop].y +
         yPadding * 2;
-    console.log(x, y, width, height, "값이다 ~~~~~~~");
     return {
         x,
         y,
