@@ -3,6 +3,5 @@ node_modules/
 
 backend/src/config/*
 backend/src/.env
-client/package-lock.json
 backend/src/config/dbconfig.json
-client/package-lock.json
+backend/src/config/dbconfig.json

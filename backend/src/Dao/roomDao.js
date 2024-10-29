@@ -6,22 +6,18 @@ const client = new MongoClient(url, {
     maxPoolSize: 10,
 });
 const RoomDao = {
-    createRoom: async (roomCode) => {
+    createRoom: async (roomCode,nickname) => {
         const newRoom = {
-            room: {
-                code: roomCode,
-                participants: {
-                    participant: {
-                        nickname: "GOONGYE",
-                        words: {
-                            word: "아니",
-                        },
-                        missions: {},
-                        secret: {},
-                    },
+            code: roomCode,
+            participants: [
+                {
+                    nickname: nickname,
+                    words: [], // words를 배열로 저장하면 추후 여러 단어를 추가하기 용이함
+                    missions: [], // 추후 추가할 미션에 대한 구조 설정
+                    secret: [], // 추후 추가할 비밀에 대한 구조 설정
                 },
-                photos: {},
-            },
+            ],
+            photos: [], // 사진 관련 데이터 저장 공간
         };
         await client.connect();
         let result;
@@ -62,7 +58,7 @@ const RoomDao = {
             const rooms = db.collection("rooms");
 
             // roomId에 따라 필터링
-            room = await rooms.findOne({ "room.code": roomCode });
+            room = await rooms.findOne({ code: roomCode });
         } catch (error) {
             throw error;
         } finally {
@@ -77,7 +73,7 @@ const RoomDao = {
             const db = client.db("database");
             const rooms = db.collection("rooms");
             // roomId에 따라 필터링
-            result = await rooms.deleteOne({ "room.code": roomCode });
+            result = await rooms.deleteOne({ code: roomCode });
         } catch (error) {
             throw error;
         } finally {
@@ -93,8 +89,8 @@ const RoomDao = {
             const rooms = db.collection("rooms");
             // roomId에 따라 필터링
             result = await rooms.updateOne(
-                { "room.code": roomCode },
-                { $set: { "room.code": "123123" } }
+                { code: roomCode },
+                { $set: { code: "goods" } }
             );
         } catch (error) {
             throw error;

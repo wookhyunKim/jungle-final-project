@@ -14,6 +14,9 @@ const static = require("serve-static");
 const roomRouter = require("./routes/roomRoute");
 app.use("/room", roomRouter);
 
+const memberRouter = require("./routes/memberRoute");
+app.use("/member", memberRouter);
+
 app.get("*", (_, res) => {
     res.status(404).send("404 Not Found");
 });

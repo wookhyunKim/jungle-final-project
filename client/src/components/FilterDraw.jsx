@@ -7,10 +7,6 @@ const FilterDraw = () => {
     const canvasRef = useRef(null);
     const initialLoadedRef = useRef(false);
     const [status, setStatus] = useState("Initializing...");
-    const [x, setX] = useState(2);
-    const [y, setY] = useState(4);
-    const [w, setW] = useState(6);
-    const [h, setH] = useState(7);
 
     const videoSize = {
         width: 640,
@@ -28,10 +24,6 @@ const FilterDraw = () => {
                 const { x, y, width, height } = calculateFilterPosition(
                     face[0].keypoints
                 );
-                setX(x);
-                setY(y);
-                setW(width);
-                setH(height);
                 console.log("=======", x, y, width, height);
                 ctx.drawImage(image, x, y, width, height);
             }
@@ -66,9 +58,6 @@ const FilterDraw = () => {
                 ref={canvasRef}
                 className="filter-canvas"
             />
-            <p>
-                {x},{y},{w},{h}
-            </p>
             <p className="status">{status}</p>
         </>
     );

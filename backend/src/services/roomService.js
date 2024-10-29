@@ -4,8 +4,8 @@ async function getAllRooms() {
     const result = await RoomDao.getAllRooms();
     return result;
 }
-async function createRoom(roomCode) {
-    const result = await RoomDao.createRoom(roomCode);
+async function createRoom(roomCode,nickname) {
+    const result = await RoomDao.createRoom(roomCode,nickname);
     return result;
 }
 async function getOneRoom(roomCode) {
