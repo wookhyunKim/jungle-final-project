@@ -1,9 +1,9 @@
 import GoongCmt from "./common/GoongCmt"
 
-const GoongYeCmtSec = () => {
+const GoongYeCmtSec = ({text}) => {
   return (
     <>
-      <GoongCmt/>
+      <GoongCmt comment = {text}/>
     </>
   )
 }

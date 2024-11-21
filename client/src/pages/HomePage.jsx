@@ -5,16 +5,20 @@ import nextButton from '../assets/images/nextButton.png';
 import HostOrGuest from '../components/HostOrGuest';
 import Button from '../components/common/Button.jsx'
 import '../styles/homePage.css';
+//상태관리 store 가져오기
+import { usePlayerStore } from '../components/store/players.js';
 
 
 const HomePage = () => {
     const [isHome, setIsHome] = useState(false);
     const navigate = useNavigate(); // 페이지 이동을 위한 hook
+    const[nickname,setNickname] = useState('');
     
     const toGuestorHost = () => {
       setIsHome(true);
-      navigate('/hostOrGuest');
+      navigate('/hostOrGuest',{state:{nickname}});
     }
+    
     return (
       <div className="game-container">
         {!isHome ? (
@@ -39,6 +43,8 @@ const HomePage = () => {
                 type="text" 
                 placeholder="닉네임을 입력하세요" 
                 className="nickname-input"
+                value={nickname}
+                onChange={(event) => setNickname(event.target.value)}
               />
               <button 
                 className="arrow-button"

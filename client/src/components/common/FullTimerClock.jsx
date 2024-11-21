@@ -4,6 +4,7 @@
 //다만 모달 뜨는 순간만 타이머 멈춤
 
 import { useEffect, useState } from "react";
+import useStoreTime from "../store/gameInfoStore";
 
 const timerStyles = {
     container: {
@@ -28,14 +29,27 @@ const getSeconds = (time) => {
     }
 }
 
-const Timer = () => {
-    const [time, setTime] = useState(300); // 남은 시간 (단위: 초)
+const Timer = ({ isModalOpen }) => {
+    const time = useStoreTime((state) => state.time);
+    const decrementTime = useStoreTime((state) => state.decrementTime);
+
     useEffect(() => {
+        if (time === 0) {
+            console.log("타이머 종료 이벤트 호출");
+            return;
+        }
+
         const timer = setInterval(() => {
-            setTime((prev) => prev - 1);
+            if (!isModalOpen) {
+                decrementTime();
+            }
         }, 1000);
+
         return () => clearInterval(timer);
-    }, [time]);
+    }, [time, isModalOpen, decrementTime]);
+
+    const getSeconds = (time) => String(time % 60).padStart(2, '0');
+
     return (
         <div className="timer-container" style={timerStyles.container}>
             <div className="timer-box">
@@ -45,7 +59,6 @@ const Timer = () => {
             </div>
         </div>
     );
-}
-
+};
 
 export default Timer;
