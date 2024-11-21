@@ -4,11 +4,8 @@ let session;
 
 /* OPENVIDU METHODS */
 
-function joinSession() {
-
-	let mySessionId = document.getElementById("sessionId").value;
-	let myUserName = document.getElementById("userName").value;
-
+function joinSession(roomCode,nickName) {
+	console.log("첫번째 방 코드:", roomCode);
 	// --- 1) Get an OpenVidu object ---
 
 	OV = new OpenVidu();
@@ -49,19 +46,13 @@ function joinSession() {
 	// --- 4) Connect to the session with a valid user token ---
 
 	// Get a token from the OpenVidu deployment
-	getToken(mySessionId).then(token => {
+	getToken(roomCode).then(token => {
+		console.log("방코드:",roomCode);
 
 		// First param is the token got from the OpenVidu deployment. Second param can be retrieved by every user on event
 		// 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
-		session.connect(token, { clientData: myUserName })
+		session.connect(token, { clientData: nickName })
 			.then(() => {
-
-				// --- 5) Set page layout for active call ---
-
-				document.getElementById('session-title').innerText = mySessionId;
-				document.getElementById('join').style.display = 'none';
-				document.getElementById('session').style.display = 'block';
-
 				// --- 6) Get your own camera stream with the desired properties ---
 
 				let publisher = OV.initPublisher('video-container', {
@@ -79,20 +70,29 @@ function joinSession() {
 
 				// When our HTML video has been added to DOM...
 				publisher.on('videoElementCreated', function (event) {
-					initMainVideo(event.element, myUserName);
-					appendUserData(event.element, myUserName);
+					initMainVideo(event.element, nickName);
+					appendUserData(event.element, nickName);
 					event.element['muted'] = true;
 				});
 
 				// --- 8) Publish your stream ---
 
 				session.publish(publisher);
-
+				console.log("publish success");
 			})
 			.catch(error => {
 				console.log('There was an error connecting to the session:', error.code, error.message);
 			});
 	});
+}
+
+function setPageLayout(){
+	// --- 5) Set page layout for active call ---
+
+	document.getElementById('session-title').innerText = roomCode;
+	document.getElementById('join').style.display = 'none';
+	document.getElementById('session').style.display = 'block';
+
 }
 
 function leaveSession() {
@@ -117,36 +117,73 @@ window.onbeforeunload = function () {
 
 /* APPLICATION SPECIFIC METHODS */
 
-window.addEventListener('load', function () {
-	generateParticipantInfo();
-});
-
-function generateParticipantInfo() {
-	document.getElementById("sessionId").value = "SessionA";
-	document.getElementById("userName").value = "Participant" + Math.floor(Math.random() * 100);
-}
+// window.addEventListener('load', function () {
+// 	generateParticipantInfo();
+// });
 
 function appendUserData(videoElement, connection) {
+	// let userData;
+	// let nodeId;
+	// if (typeof connection === "string") {
+	// 	userData = connection;
+	// 	nodeId = connection;
+	// } else {
+	// 	userData = JSON.parse(connection.data).clientData;
+	// 	nodeId = connection.connectionId;
+	// }
+	// let dataNode = document.createElement('div');
+	// dataNode.className = "data-node";
+	// dataNode.id = "data-" + nodeId;
+	// dataNode.innerHTML = "<p>" + userData + "</p>";
+	// videoElement.parentNode.insertBefore(dataNode, videoElement.nextSibling);
+	// addClickListener(videoElement, userData);
+
 	let userData;
-	let nodeId;
-	if (typeof connection === "string") {
-		userData = connection;
-		nodeId = connection;
-	} else {
-		userData = JSON.parse(connection.data).clientData;
-		nodeId = connection.connectionId;
-	}
-	let dataNode = document.createElement('div');
-	dataNode.className = "data-node";
-	dataNode.id = "data-" + nodeId;
-	dataNode.innerHTML = "<p>" + userData + "</p>";
-	videoElement.parentNode.insertBefore(dataNode, videoElement.nextSibling);
-	addClickListener(videoElement, userData);
+    let nodeId;
+    if (typeof connection === "string") {
+        userData = connection;
+        nodeId = connection;
+    } else {
+        userData = JSON.parse(connection.data).clientData;
+        nodeId = connection.connectionId;
+    }
+
+	console.log("userData: ",userData);
+	console.log("nodeId: ",nodeId);
+
+    // 비디오 아래에 닉네임 표시
+    let dataNode = document.createElement('div');
+    dataNode.className = "data-node";
+    dataNode.id = "data-" + nodeId;
+    dataNode.innerHTML = "<p>" + userData + "</p>";
+    videoElement.parentNode.insertBefore(dataNode, videoElement.nextSibling);
+
+    // player-table에 닉네임 추가
+    const playerTable = document.querySelector('.player-table');
+    const playerSlot = document.createElement('div');
+    playerSlot.className = `player-slot occupied`;
+    playerSlot.id = "slot-" + nodeId;
+    playerSlot.innerHTML = `<div class="player-info">
+                                <span>플레이어</span>
+                                <span>${userData}</span>
+                            </div>`;
+    playerTable.appendChild(playerSlot);
 }
 
 function removeUserData(connection) {
-	let dataNode = document.getElementById("data-" + connection.connectionId);
-	dataNode.parentNode.removeChild(dataNode);
+	// let dataNode = document.getElementById("data-" + connection.connectionId);
+	// dataNode.parentNode.removeChild(dataNode);
+	// 비디오 아래의 닉네임 제거
+    let dataNode = document.getElementById("data-" + connection.connectionId);
+    if (dataNode) {
+        dataNode.parentNode.removeChild(dataNode);
+    }
+
+    // player-table에서 닉네임 제거
+    let playerSlot = document.getElementById("slot-" + connection.connectionId);
+    if (playerSlot) {
+        playerSlot.parentNode.removeChild(playerSlot);
+    }
 }
 
 function removeAllUserData() {
@@ -194,8 +231,8 @@ function initMainVideo(videoElement, userData) {
 
 let APPLICATION_SERVER_URL = "https://mmyopenvidu.onrender.com/";
 
-function getToken(mySessionId) {
-	return createSession(mySessionId).then(sessionId => createToken(sessionId));
+function getToken(roomCode) {
+	return createSession(roomCode).then(sessionId => createToken(sessionId));
 }
 
 function createSession(sessionId) {

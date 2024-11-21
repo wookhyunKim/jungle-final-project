@@ -1,21 +1,13 @@
-// const Button = () => {
-//   return (
-//     <button></button>
-//   );
-// };
-
-// export default Button;
-
 import PropTypes from 'prop-types';
 
 const Button = ({ 
-  onClick, 
+  onClick = () => {}, 
   disabled = false, 
   variant = 'red',  // 기본값을 'red'로 변경
   size = 'medium', 
   children,
   isLoading = false,
-  className 
+  className = ''
 }) => {
   const getButtonStyles = () => {
     const baseStyles = 'font-bold transition-colors';
@@ -32,7 +24,7 @@ const Button = ({
       large: 'px-8 text-lg'
     };
 
-    return `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className || ''}`;
+    return `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
   };
 
   return (
@@ -56,15 +48,4 @@ Button.propTypes = {
   className: PropTypes.string
 };
 
-Button.defaultProps = {
-  onClick: () => {},
-  disabled: false,
-  variant: 'red',  // 기본값 변경
-  size: 'medium',
-  isLoading: false,
-  className: ''
-};
-
 export default Button;
-
-

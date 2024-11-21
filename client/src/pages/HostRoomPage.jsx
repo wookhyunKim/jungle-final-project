@@ -42,8 +42,6 @@
 
 // export default GuestRoomPage
 
-
-
 // import HostImage from '../assets/images/hostAvatar.png';
 // import HostOrGuest from "../components/HostOrGuest";
 // import { useState } from 'react';
@@ -58,17 +56,15 @@
 //   const [roomCode, setRoomCode] = useState('임시코드');
 //   const [isGameStarted, setIsGameStarted] = useState(false);
 
-
 //   const fetchPlayerInfo = () => {
 
 //   };
-
 
 //   const fetchRoomCode = () => {
 
 //   };
 
-  // 게임 시작함수
+// 게임 시작함수
 //   const handleStartGame = () => {
 //     setIsGameStarted(true);
 //   };
@@ -128,16 +124,33 @@
 // export default GuestRoomPage;
 
 import React from 'react'
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState, useRef } from "react";
 import HostOrGuest from '../components/HostOrGuest'
-import Host from '../components/Host'
+import Profile from '../components/Profile'
 import WaitingroomTable from '../components/common/WaitingroomTable'
 
 const HostRoomPage = () => {
+  const location = useLocation();
+  const {code,nickname} = location.state || {};
+
+
+    const hasEffectRun = useRef(false); // Flag to prevent double execution
+
+    useEffect(() => {
+      if (!hasEffectRun.current) {  // Check if effect has run
+        joinSession(code, nickname);
+        hasEffectRun.current = true;  // Mark as run
+      }
+    }, []);
   return (
+    <>
+    <h1>{code}</h1>
     <HostOrGuest>
-      <Host/>
-      <WaitingroomTable/>
+      <Profile role={"HOST"} btnName={"시작하기"} type={true}/>
+      
     </HostOrGuest>
+    </>
   )
 }
 

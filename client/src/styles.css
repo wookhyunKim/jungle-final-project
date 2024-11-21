@@ -264,16 +264,3 @@ video {
 		max-width: inherit;
 	}
 }
-
-button {
-	font-size: 20px;
-	padding: 10px 20px;
-	margin-bottom: 8px;
-}
-
-#count {
-	font-size: 15px;
-	padding:  10px;
-	padding-top: 0px;
-}
-

@@ -20,10 +20,10 @@ const HostOrGuest = (props) => {
             <section className="hostOrGuest-main">
                 {props.children}
             </section>
-            <div className="footer">
+            <div className="hostOrGuest-footer">
                 <Button onClick={handleBackBtn} className="backbutton"
                 variant="black"
-                size = "meduim">Back</Button>
+                size = "medium">Back</Button>
             </div>
         </div>
     );
